@@ -1,4 +1,4 @@
-console.log("Blog script loaded!");
+// Creating the Blog Type
 type Blog = {
     title : string;
     date : string;
@@ -7,7 +7,7 @@ type Blog = {
     imageAlt : string;
     slug : string;
 }
-
+// Creating are list of blogs
 const blogs : Blog[] = [
     {
         title: "First Day of Classes at Cal Poly!",
@@ -26,10 +26,10 @@ const blogs : Blog[] = [
         slug: "raku-ramen"
     },
 ];
-
+// Creating the actual blogs
 function createBlogs(blogs : Blog[]): void {
     const blogContainer = document.getElementById('blog-container');
-
+// Looping through each blog and adding there elements
     blogs.forEach((blog) => {
         const blogDiv = document.createElement('div');   
         blogDiv.className = "blog-post";
@@ -44,4 +44,5 @@ function createBlogs(blogs : Blog[]): void {
         blogContainer?.appendChild(blogDiv);
     })    
 }
+// Running the reate blogs function to make it all work
 createBlogs(blogs)
