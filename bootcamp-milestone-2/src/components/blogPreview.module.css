@@ -1,0 +1,23 @@
+.readMoreLink {
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    color : black ;
+}
+.readMoreLink:hover {
+    color : #38bdf8;
+}
+.readMoreLink:active{
+    color : blue;
+}
+.center {
+    text-align: center;
+    align-items: center;
+}
+
+.centerImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
