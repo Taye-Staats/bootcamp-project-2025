@@ -3,7 +3,10 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['live.staticflickr.com'],
+    domains: [
+      'live.staticflickr.com',
+      'flic.kr'
+    ],
   },
   webpack(config) {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
