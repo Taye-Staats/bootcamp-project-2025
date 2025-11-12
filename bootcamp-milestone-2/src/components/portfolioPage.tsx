@@ -16,14 +16,12 @@ type PortfolioProps  = {
     linkInfo2 : string;
     githubLink : string;
     demoLink : string;
-    imageAlt : string;
 
 }
 
 export default function PortfolioPage({ title, date, description, image, image2, image3, linkInfo, linkInfo2
-                                    , githubLink, demoLink, imageAlt, alt, alt2, alt3 }: PortfolioProps) {
+                                    , githubLink, demoLink,  alt, alt2, alt3 }: PortfolioProps) {
     console.log("Image prop:", image)
-    console.log("Alt prop:", imageAlt)
     return (
 		// replace everything between the <div> & </div> tags
 		// with your code from earlier milestones
@@ -32,20 +30,30 @@ export default function PortfolioPage({ title, date, description, image, image2,
             <h3>{title} </h3>
         <div>
             <p><strong>Date:</strong>{date}</p>
-			<Image src={image} alt={alt} width={500} height={700} className = "centerImage" ></Image>
-            <Image src={image2} alt={alt2} width={500} height={700} className = "centerImage" ></Image>
-            <Image src={image3} alt={alt3} width={500} height={700} className = "centerImage" ></Image>
+            <div className = "imageRow">
+			<Image src={image} alt={alt} width={200} height={300}></Image>
+            <Image src={image2} alt={alt2} width={200} height={300} ></Image>
+            <Image src={image3} alt={alt3} width={200} height={300} ></Image>
+            </div>
             <p>{description}</p>
             <p><strong>{linkInfo}</strong></p>
             <div className={styles.readMoreLink}>
-            <Link href={githubLink}>Repo</Link>
+            {githubLink ? (
+                <Link href={githubLink}>Repo</Link>
+            ) : (
+                <p className="text-red-500">GitHub link not available</p>
+            )}
             </div>
             <p><strong>{linkInfo2}</strong></p>
             <div className={styles.readMoreLink}>
-            <Link href={demoLink}>Demo</Link>
+            {demoLink ? (
+                <Link href={demoLink}>Demo</Link>
+            ) : (
+                <p className="text-red-500">Demo link not available</p>
+            )}
             </div>
             <div className="center goBackLink">
-            <Link href="/blog">GO BACK</Link>
+            <Link href="/portfolio">GO BACK</Link>
             </div>
             <br/>   
         </div>

@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import {connectBlogsDB}from '@/database/dbBlog';
 
 // typescript type (can also be an interface)
 type Blog = {
@@ -24,8 +25,14 @@ const blogSchema = new Schema<Blog>({
 })
 
 //defining the collection and model
-const Blog = mongoose.models['blogs'] ||
-    mongoose.model('blogs', blogSchema);
+// const Blog = mongoose.models['blogs'] ||
+//     mongoose.model('blogs', blogSchema);
 
-export default Blog;
+// export default Blog;
 
+const getBlogModel = async () => {
+  const connection = await connectBlogsDB();
+  return connection.model("Blog", blogSchema, "blogs"); // 👈 Explicit collection name
+};
+
+export default getBlogModel;

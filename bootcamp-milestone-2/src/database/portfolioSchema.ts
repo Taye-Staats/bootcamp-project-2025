@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import {connectPortfolioPrevDB}from '@/database/dbPortfolio';
 
 // typescript type (can also be an interface)
 type PortfolioPrev = {
@@ -22,7 +23,13 @@ const prevSchema = new Schema<PortfolioPrev>({
 })
 
 // defining the collection and model
-const Prev = mongoose.models['portfolioprev'] ||
-    mongoose.model('portfolioprev', prevSchema, 'portfolioprev');
+// const Prev = mongoose.models['portfolioprev'] ||
+//     mongoose.model('portfolioprev', prevSchema, 'portfolioprev');
 
-export default Prev;
+// export default Prev;
+const getPortfolioModel = async () => {
+  const connection = await connectPortfolioPrevDB();
+  return connection.model("PortfolioPrev", prevSchema, "portfolioprev");
+};
+
+export default getPortfolioModel;

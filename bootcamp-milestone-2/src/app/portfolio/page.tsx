@@ -1,9 +1,9 @@
 import PortfolioPreview from '@/components/portfolioPreview';
-import {connectPortfolioPrevDB}from '@/database/dbPortfolio';
+import getPortfolioModel from '@/database/portfolioSchema';
 import Prev from '@/database/portfolioSchema'
 export default async function portfolioPrevPage() {
  
-    await connectPortfolioPrevDB()
+    await getPortfolios()
     const portfiolos = await getPortfolios()
     console.log("✅ Connected to MongoDB2")
     console.log("Fetched portfolios:", portfiolos)
@@ -16,7 +16,7 @@ export default async function portfolioPrevPage() {
           portfiolos.map((portfiolo) => (
             <PortfolioPreview
               
-              key={portfiolo._id}
+              key={portfiolo._id.toString()}
               slug={portfiolo.slug}
               title={portfiolo.title}
               description={portfiolo.description}
@@ -33,14 +33,13 @@ export default async function portfolioPrevPage() {
   );
 }
 async function getPortfolios(){
-    await connectPortfolioPrevDB() // function from db.ts before
-
     try {
-            // query for all blogs and sort by date
-        const portfolios = await Prev.find().sort({ date: -1 })
-            // send a response as the blogs as the message
-        return portfolios
-    } catch (err) {
-        return null
-    }
+    const Portfolio = await getPortfolioModel();
+    console.log("✅ Model loaded:", Portfolio.modelName);
+    const portfolios = await Portfolio.find().sort({ date: -1 });
+    return portfolios;
+  } catch (err) {
+    console.error("Error fetching portfolios:", err);
+    return null;
+  }
 }

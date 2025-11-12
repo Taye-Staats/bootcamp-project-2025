@@ -26,7 +26,7 @@ export default function PortfolioPreview({ title, date, description, image, imag
             <p><strong>Date:</strong>{date}</p>
       <Image src={image} alt={imageAlt} width={250} height={300} className ={styles.centerImage} ></Image>
             <p>{description}</p>
-            <Link href={`/blog/${slug}`} className={styles.readMoreLink}>
+            <Link href={`/portfolio/${slug}`} className={styles.readMoreLink}>
                 <h3>Read More</h3>
             </Link>
             <br/>   

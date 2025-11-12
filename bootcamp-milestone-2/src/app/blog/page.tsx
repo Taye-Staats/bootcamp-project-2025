@@ -1,9 +1,9 @@
 import BlogPreview from '@/components/blogPreview';
 import {connectBlogsDB}from '@/database/dbBlog';
 import Blog from '@/database/blogSchema'
+import getBlogModel from "@/database/blogSchema";
 export default async function BlogPage() {
   const blogs = await getBlogs()
-    await connectBlogsDB()
     console.log("✅ Connected to MongoDB")
     console.log("Fetched blogs:", blogs)
   return (
@@ -16,7 +16,7 @@ export default async function BlogPage() {
           blogs.map((blog) => (
             <BlogPreview
               
-              key={blog._id}
+              key={blog._id.toString()}
               slug={blog.slug}
               title={blog.title}
               description={blog.description}
@@ -32,15 +32,20 @@ export default async function BlogPage() {
     </div>
   );
 }
-async function getBlogs(){
-	await connectBlogsDB() // function from db.ts before
+// async function getBlogs(){
+// 	await connectBlogsDB() // function from db.ts before
 
-	try {
-			// query for all blogs and sort by date
-	    const blogs = await Blog.find().sort({ date: -1 })
-			// send a response as the blogs as the message
-	    return blogs
-	} catch (err) {
-	    return null
-	}
+// 	try {
+// 			// query for all blogs and sort by date
+// 	    const blogs = await Blog.find().sort({ date: -1 })
+// 			// send a response as the blogs as the message
+// 	    return blogs
+// 	} catch (err) {
+// 	    return null
+// 	}
+// }
+export async function getBlogs() {
+  const Blog = await getBlogModel();
+  const blogs = await Blog.find().sort({ date: -1 });
+  return blogs;
 }
